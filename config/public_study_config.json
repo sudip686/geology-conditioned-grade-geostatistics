@@ -1,0 +1,79 @@
+{
+  "censoring": {
+    "base_value_pct": 0.025,
+    "sensitivity_values_pct": [
+      0.0,
+      0.05
+    ],
+    "token": "<0.05"
+  },
+  "composite_lengths_m": [
+    2.0,
+    2.5,
+    3.0
+  ],
+  "contact_windows_m": [
+    1.0,
+    2.0,
+    5.0,
+    10.0
+  ],
+  "pre_submission_method_correction": {
+    "date": "2026-07-29",
+    "decision_thresholds_changed": false,
+    "kriging_covariance_fitting": "outer-training-fold-only",
+    "legacy_combined_raw_branch": "sensitivity_only",
+    "reason": "independent reviewer audit before submission",
+    "residual_variogram_primary_domain_policy": "same_domain",
+    "residual_variogram_primary_pair_mode": "between_hole_balanced",
+    "synthetic_support_matching": true,
+    "synthetic_trend_removal_matching": true
+  },
+  "primary_composite_length_m": 2.0,
+  "protocol_version": "1.1",
+  "public_release": {
+    "coordinates_or_identifiers_included": false,
+    "data_scope": "synthetic_and_identifier_free_aggregates_only",
+    "diagnostic_kriging_outputs_included": false,
+    "restricted_inputs_required_for_empirical_reproduction": true
+  },
+  "random_seed": 20260728,
+  "spatial_blocks": 5,
+  "study_id": "nrr_geology_conditioned_geostatistics_20260728",
+  "synthetic": {
+    "maximum_null_false_pass_rate": 0.05,
+    "minimum_positive_detection_rate": 0.8,
+    "primary_power_target": "strong_2x_median_collar_nearest_neighbour",
+    "scenarios": [
+      "null",
+      "stationary",
+      "hard_boundary",
+      "transitional"
+    ],
+    "sensitivity_power_targets": [
+      "strong_1x_median_collar_nearest_neighbour",
+      "weak_1x_median_collar_nearest_neighbour",
+      "weak_2x_median_collar_nearest_neighbour"
+    ],
+    "simulations_per_scenario": 500
+  },
+  "topcut_policy": {
+    "base": "none",
+    "sensitivity_quantiles": [
+      0.99,
+      0.995
+    ]
+  },
+  "validation": {
+    "bootstrap_replicates": 2000,
+    "confidence_level": 0.95,
+    "primary_schemes": [
+      "leave_one_hole_out",
+      "northing_block_buffered"
+    ],
+    "sensitivity_schemes": [
+      "leave_one_batch_out",
+      "random_row_optimism"
+    ]
+  }
+}

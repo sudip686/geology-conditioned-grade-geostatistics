@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, cite this repository snapshot."
+type: software
+title: "Geology-conditioned grade geostatistics: reproducibility code"
+version: 0.1.0
+date-released: 2026-07-29
+authors:
+  - name: "Tanga geology-conditioned geostatistics study contributors"
+keywords:
+  - geostatistics
+  - geological conditioning
+  - grouped validation
+  - synthetic power calibration

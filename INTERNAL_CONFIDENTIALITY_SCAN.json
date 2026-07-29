@@ -1,0 +1,16 @@
+{
+  "files_scanned": 21,
+  "findings": [],
+  "rules": [
+    "no Git-history files or symlinks",
+    "no actual drillhole/sample identifiers or e-mail addresses",
+    "no workstation, private-review, report, or author-metadata paths",
+    "no manuscript/document generators",
+    "no prediction, per-fold, interval-registry, or unapproved diagnostic result files",
+    "no identifier, coordinate, prediction, or fold fields in public result/config schemas",
+    "no public_release_approved=false result/config content"
+  ],
+  "schema_version": "1.0",
+  "scope": "all release files except this report and the SHA-256 manifest",
+  "status": "passed"
+}

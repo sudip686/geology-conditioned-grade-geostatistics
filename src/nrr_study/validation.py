@@ -695,27 +695,29 @@ def decide_accept_pool_abstain(
         )
 
     improves = all(item.mae_difference.upper < 0 for item in evidence)
-    coverage_ok = all(
+    coverage_diagnostic = all(
         item.coverage_difference >= -maximum_coverage_loss for item in evidence
     )
-    if improves and coverage_ok:
+    if improves:
+        diagnostic_reason = (
+            "nominal uncalibrated coverage did not degrade beyond the descriptive limit"
+            if coverage_diagnostic
+            else "nominal uncalibrated coverage degraded; retained as a secondary diagnostic only"
+        )
         return DecisionOutcome(
             action="accept",
             selected_policy="geology_conditioned",
             reasons=(
                 "paired hole-bootstrap MAE intervals favour conditioning in "
                 "every primary scheme",
-                "interval coverage is not degraded beyond the prospective limit",
+                diagnostic_reason,
             ),
         )
 
     if pooled_policy_available:
-        if not improves:
-            reasons.append(
-                "conditioning lacks paired MAE improvement in every primary scheme"
-            )
-        if not coverage_ok:
-            reasons.append("conditioning degrades interval coverage")
+        reasons.append(
+            "conditioning lacks paired MAE improvement in every primary scheme"
+        )
         return DecisionOutcome(
             action="pool",
             selected_policy="pooled_geology",

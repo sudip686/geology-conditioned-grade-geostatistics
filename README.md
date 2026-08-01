@@ -61,4 +61,4 @@ The MIT License applies only to software under `src/`, tests, and examples. It
 does not grant rights in data, aggregate evidence, reports, configuration,
 manuscript, table, or figure content. See `LICENSE` and `NOTICE.md`.
 
-Version 0.2.1 is published as the verified GitHub tag v0.2.1. No archive DOI has been assigned. RELEASE_METADATA.json records the tag and the absence of a persistent identifier; CITATION.cff supplies author, version, and repository metadata.
+Version 0.3.0 is prepared as the GitHub tag v0.3.0. No archive DOI has been assigned. RELEASE_METADATA.json records the tag and the absence of a persistent identifier; CITATION.cff supplies author, version, and repository metadata.

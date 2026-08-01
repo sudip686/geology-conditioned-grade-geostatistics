@@ -1,0 +1,2 @@
+holes,folds,simulations_per_scenario,calibration_nulls_per_fold,median_hole_nnd_m,short_lag_distance_m,buffer_m,limitation
+100,5,100,500,110.11124996456081,220.22249992912162,111.8912024,independent-hole benchmark; actual composite support and frozen empirical gate are not replaced

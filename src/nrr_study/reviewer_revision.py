@@ -976,6 +976,7 @@ def geological_contrast_preservation(
     replicates: int = 20_000,
     seed: int = SEED,
     directional_zero_tolerance_tgc_pct: float = 1e-12,
+    models: Sequence[str] | None = None,
 ) -> pd.DataFrame:
     """Audit whether held-out predictions preserve within-hole lithology contrasts.
 
@@ -1056,7 +1057,7 @@ def geological_contrast_preservation(
         return pd.DataFrame()
 
     rows: list[dict[str, object]] = []
-    models = (
+    models = tuple(models) if models is not None else (
         "global_mean", "lithology_only", "geology_only",
         "partial_pooling", "idw",
     )

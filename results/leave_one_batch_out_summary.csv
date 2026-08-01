@@ -1,0 +1,2 @@
+comparison,estimate,lower,upper,confidence_level,batches,batches_favouring_lithology,bootstrap_replicates,weighting,limitation
+lithology_minus_global_leave_one_batch_out,-0.11145379015170995,-0.152961068558252,-0.06946801508510617,0.95,10,10,20000,support within hole; equal holes within batch; equal batches,"batch, hole, and location are confounded; no laboratory effect is identified"

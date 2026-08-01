@@ -32,9 +32,10 @@
   "primary_composite_length_m": 2.0,
   "protocol_version": "1.1",
   "public_release": {
+    "bounded_aggregate_outputs_included": true,
     "coordinates_or_identifiers_included": false,
     "data_scope": "synthetic_and_identifier_free_aggregates_only",
-    "diagnostic_kriging_outputs_included": false,
+    "diagnostic_kriging_row_or_fold_outputs_included": false,
     "restricted_inputs_required_for_empirical_reproduction": true
   },
   "random_seed": 20260728,

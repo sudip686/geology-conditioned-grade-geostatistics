@@ -1,0 +1,27 @@
+{
+  "approval_state": "authorized_by_data_owner_representative",
+  "controlled_access": "Qualified scholarly requests for de-identified empirical fields are handled through the corresponding-author mechanism stated in the paper.",
+  "empirical_evidence_release": "approved_non_identifying_aggregates",
+  "limitation": "Aggregate evidence supports numerical audit but cannot reproduce the restricted interval-level analysis; raw assays, coordinates, identifiers, predictions, folds, and reports remain excluded.",
+  "manuscript_items": [
+    {
+      "item": "Table 1",
+      "status": "aggregate evidence deposited"
+    },
+    {
+      "item": "Table 2",
+      "status": "aggregate evidence deposited"
+    },
+    {
+      "item": "Figures 1-6",
+      "status": "supporting aggregate evidence deposited; artwork generated outside this repository"
+    },
+    {
+      "item": "Figures S1-S3",
+      "status": "supporting aggregate evidence deposited; artwork generated outside this repository"
+    }
+  ],
+  "public_scope": "analysis_code_synthetic_workflow_and_aggregate_evidence",
+  "release_version": "0.2.0",
+  "schema_version": "1.1"
+}

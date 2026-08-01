@@ -1,0 +1,15 @@
+model_or_component,role,exact_implementation,implementation_source
+outcome,all regression/IDW/contact models,raw TGC percentage; no response transform,run_analysis.py: fixed model families
+global_mean,baseline,support-weighted training mean; weighted residual variance,models.py: GlobalMeanRegressor
+lithology_only,fixed post-analysis comparator,one-hot canonical_lithology + grsc_subtype; Ridge alpha=1e-6; support weights,information_sensitivity.py:model_factory
+geology_only,fixed primary model,one-hot canonical_lithology + grsc_subtype + weathering; Ridge alpha=1e-6; support weights,run_analysis.py:fixed_factories
+partial_pooling,"penalized context model, not hierarchical partial pooling","same geology categories plus depth_within_hole_m, hole_mean_depth_m, mid_rl; median imputation, standardization; Ridge alpha tuned in {0.1,1,10} within grouped inner folds",run_analysis.py:partial_factory
+idw,distance comparator,"power tuned in {1,2}; max_neighbors in {16,32}; radius=None; min_neighbors=1; no zero-distance/shared-parent leakage",run_analysis.py:idw_factory; models.py:IDWRegressor
+contact_pooled,contact-policy comparator,global support-weighted mean,run_analysis.py:contact policies
+contact_hard,contact-policy sensitivity,one-hot canonical_lithology; Ridge alpha=1e-6,run_analysis.py:contact policies
+contact_soft_partial_pool,contact-policy sensitivity,one-hot canonical_lithology; Ridge alpha=10,run_analysis.py:contact policies
+contact_transitional,along-hole contact-policy sensitivity,canonical_lithology + signed and absolute along-hole distance; Ridge alpha=1,run_analysis.py:contact policies
+nominal_intervals,uncalibrated diagnostic,mean +/- 1.96*sqrt(variance); training residual MSE for regression/global models; local weighted dispersion for IDW,models.py prediction methods; validation.py metrics
+diagnostic_kriging,post-gate non-decision sensitivity only,fold-local OK/RK; 10 lags; maxlag 0.5 diagonal; classical exponential; radius=1 fitted range; max/min neighbours=32/3,config/study_config.json:post_gate_diagnostic_kriging
+simple_kriging,not implemented,no Simple Kriging model,active code audit
+sgs_lva,prohibited and not implemented,"no SGS, no no-domain SGS, no locally varying anisotropy",AGENTS.md and active code audit

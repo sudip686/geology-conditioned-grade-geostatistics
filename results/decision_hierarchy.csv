@@ -1,0 +1,4 @@
+rank,tier,decision_family,status,limitation
+1,central,RQ5 accept/pool/abstain gate,abstain retained,conjunctive fail-safe; not altered by reviewer revision
+2,secondary,RQ2 geological conditioning and RQ3 contact policies,descriptive/secondary,"Holm sensitivity is post hoc, not predeclared"
+3,exploratory,RQ1 support checks; RQ4 components; post-gate kriging; RQ6 sparse evidence,diagnostic/exploratory,cannot establish local prediction

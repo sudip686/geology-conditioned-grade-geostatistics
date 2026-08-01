@@ -1,0 +1,15 @@
+stage_order,stage,source_file,count,unit,parent_stage,change_from_parent,reason,status,scope
+1,source_assays,assay_clean.csv,3350,assay_rows,,0,supplied analytical rows,reported,active Tanga study; exact row lineage
+2,analysis_eligible_assays,assay_clean.csv,3349,assay_rows,source_assays,-1,quarantine exclusion,derived_exact,active Tanga study; exact row lineage
+3,geology_fragments,assay_geology_fragments.csv,3575,fragment_rows,analysis_eligible_assays,226,split at authoritative geology interval boundaries,derived_exact,active Tanga study; exact row lineage
+4,assays_with_multiple_fragments,assay_geology_fragments.csv,217,assay_ids,analysis_eligible_assays,0,fragment multiplicity diagnostic,derived_exact,active Tanga study; exact row lineage
+5,extra_fragment_rows,assay_geology_fragments.csv,226,fragment_rows,analysis_eligible_assays,0,rows created beyond one per assay,derived_exact,active Tanga study; exact row lineage
+6,assays_with_source_logged_context_difference,assay_geology_fragments.csv,136,assay_ids,analysis_eligible_assays,0,source assay label differs from authoritative logged context; not necessarily a crossed boundary,derived_exact,active Tanga study; exact row lineage
+7,native_geology_fragment_composites,composites_native.csv,3575,composite_rows,geology_fragments,0,"native support is geology-fragmented, not necessarily one source assay",derived_exact,active Tanga study; exact row lineage
+8,native_primary_spatial_eligible,composites_native.csv,3525,composite_rows,native_geology_fragment_composites,-50,measured-survey support gate,derived_exact,active Tanga study; exact row lineage
+9,all_2m_composites,composites_2m.csv,4276,composite_rows,geology_fragments,701,fixed-support construction without bridging geology/weathering boundaries,derived_exact,active Tanga study; exact row lineage
+10,incomplete_2m_composites,composites_2m.csv,665,composite_rows,all_2m_composites,0,incomplete assayed coverage,derived_exact,active Tanga study; exact row lineage
+11,complete_2m_composites,composites_2m.csv,3611,composite_rows,all_2m_composites,-665,complete support only,derived_exact,active Tanga study; exact row lineage
+12,complete_but_spatially_ineligible_2m,composites_2m.csv,69,composite_rows,complete_2m_composites,0,survey support exclusion,derived_exact,active Tanga study; exact row lineage
+13,final_primary_2m,primary_analysis_cohort.csv,3542,composite_rows,complete_2m_composites,-69,complete and primary spatial eligible,derived_exact,active Tanga study; exact row lineage
+14,final_primary_holes,primary_analysis_cohort.csv,100,holes,final_primary_2m,0,unique holes in final primary cohort,derived_exact,active Tanga study; exact row lineage

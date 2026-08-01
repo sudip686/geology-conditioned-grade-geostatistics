@@ -1,4 +1,4 @@
-"""Analysis orchestration helpers for the active NRR empirical study.
+"""Analysis orchestration helpers for the active empirical study.
 
 These utilities operate only at observed assay/composite supports.  They do
 not create blocks, grids, resources, simulations of the deposit, or drilling

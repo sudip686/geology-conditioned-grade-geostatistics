@@ -1,0 +1,5 @@
+support,source_support_m,composite_support_m,source_tgc_mass,composite_tgc_mass,support_difference_m,tgc_mass_difference,support_conserved,tgc_mass_conserved,tolerance,tgc_mass_unit
+native,7893.79,7893.79,32772.9924,32772.9924,9.094947018e-13,0,True,True,1e-08,percent_metres
+2p0,7893.79,7893.79,32772.9924,32772.9924,1.818989404e-12,0,True,True,1e-08,percent_metres
+2p5,7893.79,7893.79,32772.9924,32772.9924,0.0,0,True,True,1e-08,percent_metres
+3p0,7893.79,7893.79,32772.9924,32772.9924,9.094947018e-13,0,True,True,1e-08,percent_metres

@@ -1,13 +1,17 @@
 cff-version: 1.2.0
-message: "If you use this software, cite this repository snapshot."
+message: "Cite this software version; a remote release tag and archive DOI are pending."
 type: software
 title: "Geology-conditioned grade geostatistics: reproducibility code"
-version: 0.1.0
-date-released: 2026-07-29
+version: 0.2.0
+license: MIT
+repository-code: "https://github.com/sudip686/geology-conditioned-grade-geostatistics"
 authors:
-  - name: "Tanga geology-conditioned geostatistics study contributors"
+  - family-names: Chanda
+    given-names: Sudipta
+    orcid: "https://orcid.org/0009-0001-5030-7524"
 keywords:
   - geostatistics
   - geological conditioning
   - grouped validation
+  - spatial buffering
   - synthetic power calibration

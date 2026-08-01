@@ -1,0 +1,62 @@
+{
+  "datasets": {
+    "synthetic_common_support.csv": [
+      "synthetic_hole",
+      "x_m",
+      "y_m",
+      "parent_group",
+      "from_m",
+      "to_m",
+      "support_m",
+      "grade_pct",
+      "domain",
+      "synthetic_composite"
+    ],
+    "synthetic_grouped_buffer_registry.csv": [
+      "synthetic_composite",
+      "parent_group",
+      "synthetic_hole",
+      "x_m",
+      "y_m",
+      "spatial_group",
+      "validation_group",
+      "role",
+      "nearest_validation_distance_m",
+      "buffer_m"
+    ],
+    "synthetic_model_comparison.csv": [
+      "model",
+      "groups",
+      "rows",
+      "mean_group_mae_pct",
+      "mean_group_bias_pct"
+    ],
+    "synthetic_parent_intervals.csv": [
+      "synthetic_hole",
+      "x_m",
+      "y_m",
+      "parent_group",
+      "from_m",
+      "to_m",
+      "support_m",
+      "grade_pct",
+      "domain"
+    ],
+    "synthetic_support_audit.csv": [
+      "parent_group",
+      "support_m_expected",
+      "grade_mass_expected",
+      "support_m_observed",
+      "grade_mass_observed",
+      "support_conserved",
+      "grade_mass_conserved"
+    ]
+  },
+  "governance": "entirely synthetic; no empirical study record is represented",
+  "schema_version": "1.0",
+  "scope": "outputs created only by examples/synthetic_end_to_end.py",
+  "units": {
+    "distance_and_support": "metres",
+    "grade_and_error": "percent"
+  }
+}

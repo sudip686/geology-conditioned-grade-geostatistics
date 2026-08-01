@@ -1,0 +1,160 @@
+{
+  "implementation_status": "pre-submission audited correction",
+  "synthetic_primary_benchmark": "strong_2nn_primary",
+  "synthetic": {
+    "threshold": 0.03614857433002106,
+    "direction": "higher",
+    "null_false_pass_rate": 0.048,
+    "positive_detection_rates": {
+      "stationary": 0.758,
+      "hard_boundary": 0.8,
+      "transitional": 0.934
+    },
+    "maximum_null_false_pass_rate": 0.05,
+    "minimum_positive_detection_rate": 0.8,
+    "meets_targets": false
+  },
+  "synthetic_power_grid": [
+    {
+      "benchmark": "strong_2nn_primary",
+      "acceptance_role": "primary_power_target",
+      "practical_range": 223.7824048,
+      "structured_variance": 1.0,
+      "nugget_variance": 0.25,
+      "boundary_effect": 1.0,
+      "threshold": 0.03614857433002106,
+      "null_false_pass_rate": 0.048,
+      "detection_stationary": 0.758,
+      "detection_hard_boundary": 0.8,
+      "detection_transitional": 0.934,
+      "meets_targets": false
+    },
+    {
+      "benchmark": "strong_1nn",
+      "acceptance_role": "power_sensitivity",
+      "practical_range": 111.8912024,
+      "structured_variance": 1.0,
+      "nugget_variance": 0.25,
+      "boundary_effect": 1.0,
+      "threshold": 0.03614857433002106,
+      "null_false_pass_rate": 0.048,
+      "detection_stationary": 0.428,
+      "detection_hard_boundary": 0.51,
+      "detection_transitional": 0.88,
+      "meets_targets": false
+    },
+    {
+      "benchmark": "weak_2nn",
+      "acceptance_role": "power_sensitivity",
+      "practical_range": 223.7824048,
+      "structured_variance": 0.5,
+      "nugget_variance": 0.5,
+      "boundary_effect": 0.5,
+      "threshold": 0.03614857433002106,
+      "null_false_pass_rate": 0.048,
+      "detection_stationary": 0.638,
+      "detection_hard_boundary": 0.704,
+      "detection_transitional": 0.798,
+      "meets_targets": false
+    },
+    {
+      "benchmark": "weak_1nn",
+      "acceptance_role": "power_sensitivity",
+      "practical_range": 111.8912024,
+      "structured_variance": 0.5,
+      "nugget_variance": 0.5,
+      "boundary_effect": 0.5,
+      "threshold": 0.03614857433002106,
+      "null_false_pass_rate": 0.048,
+      "detection_stationary": 0.298,
+      "detection_hard_boundary": 0.38,
+      "detection_transitional": 0.582,
+      "meets_targets": false
+    }
+  ],
+  "simulations_per_scenario": 500,
+  "actual_residual_short_lag_score": 0.0014319351125384738,
+  "actual_score_passed": false,
+  "downhole_stability": {
+    "passed": false,
+    "decision": "abstain",
+    "reasons": [
+      "range ratio 5.91 > 3",
+      "range CV 0.651 > 0.5"
+    ],
+    "successful_fits": 16,
+    "supported_bins": 8,
+    "median_range": 67.52679770996977,
+    "range_ratio": 5.912803454469664,
+    "range_cv": 0.6510104927555131,
+    "worst_normalized_rmse": 0.04940491262884506,
+    "worst_nugget_fraction": 0.59305973787833
+  },
+  "residual_omnidirectional_stability": {
+    "passed": false,
+    "decision": "abstain",
+    "reasons": [
+      "range ratio 3.71 > 3",
+      "nugget fraction 0.913 > 0.8"
+    ],
+    "successful_fits": 16,
+    "supported_bins": 8,
+    "median_range": 345.91402989598737,
+    "range_ratio": 3.714673913500888,
+    "range_cv": 0.38968052170241496,
+    "worst_normalized_rmse": 0.05202629857301564,
+    "worst_nugget_fraction": 0.9132094808929406
+  },
+  "residual_gate_primary_support": {
+    "pair_mode": "between_hole_balanced",
+    "pair_domain_policy": "same_domain",
+    "fit_weight": "unique independent hole pairs"
+  },
+  "residual_gate_sensitivities": {
+    "legacy_combined_raw_pooled": {
+      "passed": false,
+      "decision": "abstain",
+      "reasons": [
+        "nugget fraction 0.904 > 0.8"
+      ],
+      "successful_fits": 4,
+      "supported_bins": 10,
+      "median_range": 244.86631829992717,
+      "range_ratio": 2.794442632527558,
+      "range_cv": 0.4877999807304751,
+      "worst_normalized_rmse": 0.027212706456064748,
+      "worst_nugget_fraction": 0.9041183023126569
+    },
+    "between_hole_balanced_pooled": {
+      "passed": false,
+      "decision": "abstain",
+      "reasons": [
+        "nugget fraction 0.835 > 0.8"
+      ],
+      "successful_fits": 4,
+      "supported_bins": 10,
+      "median_range": 277.5747888643895,
+      "range_ratio": 2.201042039513383,
+      "range_cv": 0.38223575115837066,
+      "worst_normalized_rmse": 0.043375984890779276,
+      "worst_nugget_fraction": 0.835100131657273
+    },
+    "graphitic_only_between_hole_balanced": {
+      "passed": false,
+      "decision": "abstain",
+      "reasons": [
+        "nugget fraction 0.892 > 0.8"
+      ],
+      "successful_fits": 4,
+      "supported_bins": 8,
+      "median_range": 296.1986978598318,
+      "range_ratio": 2.3596816213946314,
+      "range_cv": 0.4147151007875979,
+      "worst_normalized_rmse": 0.024143988438348193,
+      "worst_nugget_fraction": 0.8923029546486113
+    }
+  },
+  "kriging_gate_passed": false,
+  "fold_local_covariance_refit_required": true,
+  "fail_safe_rule": "kriging requires synthetic target attainment, an actual residual score beyond the null-calibrated threshold, and full same-domain between-hole-balanced residual variogram stability; every outer training fold must then refit and pass its own covariance gate"
+}

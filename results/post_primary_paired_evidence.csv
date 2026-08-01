@@ -1,0 +1,7 @@
+conditioned_model,comparator_model,scheme,estimate,lower,upper,confidence_level,n_holes,bootstrap_replicates,support_rule,comparison
+lithology_only,global_mean,leave_one_hole_out,-0.09825494794681201,-0.15162749942928036,-0.050444434330415296,0.95,100,2000,supported only when the upper 95% CI is below zero in both primary held-out schemes,lithology_increment
+lithology_only,global_mean,northing_block_buffered,-0.092913056460745,-0.14360647834588677,-0.047447822254864075,0.95,100,2000,supported only when the upper 95% CI is below zero in both primary held-out schemes,lithology_increment
+geology_only,lithology_only,leave_one_hole_out,-0.04637562933576569,-0.08876522264308648,-0.008188899444911212,0.95,100,2000,supported only when the upper 95% CI is below zero in both primary held-out schemes,weathering_increment
+geology_only,lithology_only,northing_block_buffered,-0.03964848429276742,-0.08403904853007625,-0.0006865467732790303,0.95,100,2000,supported only when the upper 95% CI is below zero in both primary held-out schemes,weathering_increment
+partial_pooling,geology_only,leave_one_hole_out,-0.0040362857238385305,-0.02233166060182015,0.01566170951806519,0.95,100,2000,supported only when the upper 95% CI is below zero in both primary held-out schemes,depth_rl_increment
+partial_pooling,geology_only,northing_block_buffered,0.022001618382204317,-0.009128695381041002,0.0568518972040323,0.95,100,2000,supported only when the upper 95% CI is below zero in both primary held-out schemes,depth_rl_increment

@@ -1,0 +1,22 @@
+file,paper_support,release_limitation
+bounded_kriging_metrics.csv,bounded non-decision kriging aggregate,cannot reverse the central abstention
+bounded_kriging_paired_evidence.csv,bounded non-decision kriging aggregate,cannot reverse the central abstention
+bounded_kriging_summary.json,bounded non-decision kriging aggregate,cannot reverse the central abstention
+cohort_reconciliation.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+contact_policy_validation.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+contact_window_summary.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+decision_hierarchy.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+depth_rl_associations.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+domain_weathering_summary.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+implemented_model_specification.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+independent_synthetic_evaluation.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+mass_conservation.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+multiplicity_sensitivity.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+paired_primary_scheme_evidence.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+post_primary_paired_evidence.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+post_primary_validation_metrics.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+qaqc_aggregate_report_facts.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+spatial_robustness_summary.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+synthetic_sensitivity_summary.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+validation_metrics.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+variogram_gate_decision.json,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"

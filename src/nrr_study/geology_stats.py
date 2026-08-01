@@ -1,4 +1,4 @@
-"""Geology-conditioned descriptive statistics for the Tanga NRR study.
+"""Geology-conditioned descriptive statistics for the active Tanga study.
 
 The functions in this module are deliberately descriptive and decision-gated.
 They preserve hole-level dependence, treat logged contacts as observations, and

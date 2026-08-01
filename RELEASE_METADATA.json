@@ -1,0 +1,14 @@
+{
+  "date_generated": "2026-08-01",
+  "empirical_aggregate_evidence_included": true,
+  "empirical_data_included": false,
+  "manuscript_or_figure_generator_included": false,
+  "persistent_identifier": null,
+  "publication_status": "local_generated_not_remote_tagged",
+  "release_tag": null,
+  "repository": "https://github.com/sudip686/geology-conditioned-grade-geostatistics",
+  "schema_version": "1.0",
+  "scope": "software_tests_configuration_synthetic_workflow_and_approved_aggregates",
+  "upstream_repository_commit_before_local_build": "21a318b5f24970d99b267ef55b40f9d46ce4ac57",
+  "version": "0.2.0"
+}

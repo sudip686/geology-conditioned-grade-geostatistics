@@ -1,4 +1,4 @@
-"""Reviewer-requested statistical remediation for the active Tanga study.
+"""Additional post-analysis statistical evaluation for the active Tanga study.
 
 This module is deliberately downstream of the frozen analysis.  It does not
 replace the prospective threshold, alter the central abstention, fit an SGS,

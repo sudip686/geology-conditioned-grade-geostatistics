@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "Cite the verified v0.3.1 GitHub release; no archive DOI is assigned."
+message: "Cite the verified v0.3.2 GitHub release; no archive DOI is assigned."
 type: software
 title: "Geology-conditioned grade geostatistics: reproducibility code"
-version: 0.3.1
+version: 0.3.2
 license: MIT
 repository-code: "https://github.com/sudip686/geology-conditioned-grade-geostatistics"
 authors:

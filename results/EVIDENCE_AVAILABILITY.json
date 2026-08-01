@@ -22,6 +22,6 @@
     }
   ],
   "public_scope": "analysis_code_synthetic_workflow_and_aggregate_evidence",
-  "release_version": "0.3.0",
+  "release_version": "0.3.1",
   "schema_version": "1.1"
 }

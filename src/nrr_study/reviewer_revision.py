@@ -975,12 +975,13 @@ def geological_contrast_preservation(
     observed_contrast_thresholds: Sequence[float] = (0.0, 0.25, 0.5, 1.0),
     replicates: int = 20_000,
     seed: int = SEED,
+    directional_zero_tolerance_tgc_pct: float = 1e-12,
 ) -> pd.DataFrame:
     """Audit whether held-out predictions preserve within-hole lithology contrasts.
 
     Each lithology mean is support weighted. Lithology-pair contrasts are weighted
     equally within a hole and holes are the independent resampling units. The
-    analysis is reviewer-directed and descriptive, not preregistered.
+    analysis is an additional post-analysis evaluation and is not preregistered.
     """
     context = primary.reset_index(drop=True)[
         ["BHID", "canonical_lithology", "support_m"]
@@ -1030,6 +1031,11 @@ def geological_contrast_preservation(
                 predicted = float(
                     right["prediction_mean"] - left["prediction_mean"]
                 )
+                predicted_for_sign = (
+                    0.0
+                    if abs(predicted) <= directional_zero_tolerance_tgc_pct
+                    else predicted
+                )
                 pair_rows.append({
                     "model": model,
                     "scheme": scheme,
@@ -1042,7 +1048,7 @@ def geological_contrast_preservation(
                     "predicted_contrast": predicted,
                     "absolute_contrast_error": abs(predicted - observed),
                     "sign_agreement": float(
-                        np.sign(predicted) == np.sign(observed)
+                        np.sign(predicted_for_sign) == np.sign(observed)
                     ),
                 })
     pairs = pd.DataFrame(pair_rows)
@@ -1148,7 +1154,10 @@ def geological_contrast_preservation(
         "support within lithology; equal lithology pairs within hole; equal holes"
     )
     output["role"] = (
-        "reviewer-directed geology-informed descriptive validation"
+        "additional post-analysis geology-informed descriptive validation"
+    )
+    output["directional_zero_tolerance_tgc_pct"] = (
+        directional_zero_tolerance_tgc_pct
     )
     output["limitation"] = (
         "within-hole logged-lithology contrasts; no hard-boundary, directional-continuity, or causal claim"

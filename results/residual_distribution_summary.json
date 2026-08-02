@@ -1,0 +1,17 @@
+{
+  "raw_overall_skew": 0.7282348109059688,
+  "raw_overall_excess_kurtosis": 0.7612731267025015,
+  "log1p_overall_skew": -0.29871114414157673,
+  "log1p_overall_excess_kurtosis": -0.15812524712243947,
+  "raw_brown_forsythe_statistic": 26.720047318231153,
+  "raw_brown_forsythe_pvalue": 4.387026887344417e-17,
+  "log1p_brown_forsythe_statistic": 51.90539828561034,
+  "log1p_brown_forsythe_pvalue": 7.965862973177136e-33,
+  "transformation_variogram_sensitivity_implemented": false,
+  "normal_score_sensitivity_implemented": false,
+  "decision": "not scientifically necessary for the current claim",
+  "evidence": "raw residual skew and excess kurtosis are moderate; log1p reduces overall skew but does not remove major-lithology variance heterogeneity, while robust and classical raw-scale variograms are already retained",
+  "limitation": "the Brown-Forsythe result is influenced by strongly unequal group sizes, including only 37 QFR composites",
+  "what_would_change_decision": "extreme residual tails, transform-sensitive stable independent-hole variograms, or a future fold-local transformed prediction design with justified back-transformation",
+  "changes_frozen_gate": false
+}

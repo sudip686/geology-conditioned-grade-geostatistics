@@ -17,11 +17,11 @@
       "status": "supporting aggregate evidence deposited; artwork generated outside this repository"
     },
     {
-      "item": "Figures S1-S3",
+      "item": "Figures S1-S4",
       "status": "supporting aggregate evidence deposited; artwork generated outside this repository"
     }
   ],
   "public_scope": "analysis_code_synthetic_workflow_and_aggregate_evidence",
-  "release_version": "0.4.0",
+  "release_version": "0.5.0",
   "schema_version": "1.1"
 }

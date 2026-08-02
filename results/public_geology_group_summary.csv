@@ -1,0 +1,8 @@
+public_grouping,rows,holes,support_m,median_tgc_pct,q25_tgc_pct,q75_tgc_pct,frozen_spatial_block_count
+graphitic_schist_generic,1764,75,3528.0,3.59,2.35,5.375625,5
+graphitic_schist_GRSC1,331,33,662.0,3.884,2.6900000000000004,5.3825,5
+graphitic_schist_GRSC2,864,46,1728.0,4.9254,3.391025,6.4932125,5
+graphitic_schist_GRSC3,87,13,174.0,4.328,3.09405,5.41235,4
+qfr,37,17,74.0,0.37,0.08,0.77,5
+ambiguous,186,32,372.0,3.1399999999999997,1.738375,4.6325,5
+other,273,57,546.0,3.53,1.1531,6.35,5

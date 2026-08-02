@@ -162,6 +162,80 @@ def vectorized_short_lag_scores(matrix: np.ndarray, design: PairScoreDesign) -> 
     return result
 
 
+def vectorized_pair_universe_score_sensitivities(
+    matrix: np.ndarray, design: PairScoreDesign
+) -> dict[str, np.ndarray]:
+    """Return legacy and matched-hole-pair short-lag score variants.
+
+    The legacy variant reproduces the frozen implementation. The
+    same-supported variant averages numerator and denominator over only hole
+    pairs represented at short lags. The within-pair variant first calculates
+    the short/overall ratio inside each supported hole pair and then weights
+    those ratios equally. These diagnostics do not replace the frozen score.
+    """
+
+    values = np.asarray(matrix, dtype=float)
+    if values.ndim != 2 or not np.all(np.isfinite(values)):
+        raise ValueError("matrix must be finite and two dimensional")
+    semivariance = 0.5 * (
+        values[design.first] - values[design.second]
+    ) ** 2
+    n_groups = len(design.overall_counts)
+    overall_sums = np.zeros((n_groups, values.shape[1]), dtype=float)
+    np.add.at(overall_sums, design.inverse, semivariance)
+    overall_by_pair = overall_sums / design.overall_counts[:, None]
+    short_inverse = design.inverse[design.short_mask]
+    short_sums = np.zeros((n_groups, values.shape[1]), dtype=float)
+    np.add.at(
+        short_sums,
+        short_inverse,
+        semivariance[design.short_mask],
+    )
+    supported = design.short_counts > 0
+    if not np.any(supported):
+        nan = np.full(values.shape[1], np.nan, dtype=float)
+        return {
+            "legacy_all_pair_denominator": nan.copy(),
+            "same_supported_hole_pairs": nan.copy(),
+            "within_hole_pair_ratio": nan.copy(),
+        }
+    short_by_pair = (
+        short_sums[supported] / design.short_counts[supported, None]
+    )
+    legacy_overall = np.mean(overall_by_pair, axis=0)
+    supported_overall = np.mean(overall_by_pair[supported], axis=0)
+    supported_short = np.mean(short_by_pair, axis=0)
+
+    legacy = np.zeros(values.shape[1], dtype=float)
+    same_supported = np.zeros(values.shape[1], dtype=float)
+    legacy_positive = legacy_overall > np.finfo(float).eps
+    supported_positive = supported_overall > np.finfo(float).eps
+    legacy[legacy_positive] = (
+        1.0
+        - supported_short[legacy_positive]
+        / legacy_overall[legacy_positive]
+    )
+    same_supported[supported_positive] = (
+        1.0
+        - supported_short[supported_positive]
+        / supported_overall[supported_positive]
+    )
+
+    pair_denominator = overall_by_pair[supported]
+    valid_ratio = pair_denominator > np.finfo(float).eps
+    ratios = np.full_like(short_by_pair, np.nan)
+    ratios[valid_ratio] = (
+        short_by_pair[valid_ratio] / pair_denominator[valid_ratio]
+    )
+    with np.errstate(invalid="ignore"):
+        within_pair = 1.0 - np.nanmean(ratios, axis=0)
+    return {
+        "legacy_all_pair_denominator": legacy,
+        "same_supported_hole_pairs": same_supported,
+        "within_hole_pair_ratio": within_pair,
+    }
+
+
 def trend_residualizer() -> GeologyRegressionRegressor:
     return GeologyRegressionRegressor(
         categorical_cols=("canonical_lithology", "grsc_subtype", "weathering"),

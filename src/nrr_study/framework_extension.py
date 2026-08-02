@@ -40,8 +40,9 @@ class BoundedQuadraticRegressionRegressor:
 
     This is a reviewer-motivated, post-analysis non-spatial-covariance
     sensitivity. The degree is fixed at two and only the ridge penalty is
-    selected inside grouped training folds. It is not a variogram, kriging,
-    anisotropy, or directional-continuity model.
+    selected inside grouped training folds. Predictions are projected to the
+    physically admissible nonnegative TGC scale before tuning or evaluation.
+    It is not a variogram, kriging, anisotropy, or directional-continuity model.
     """
 
     def __init__(
@@ -123,7 +124,9 @@ class BoundedQuadraticRegressionRegressor:
             fit_kwargs["regressor__sample_weight"] = weights
         feature_frame = data.loc[:, list(features)]
         self.pipeline_.fit(feature_frame, target, **fit_kwargs)
-        fitted = np.asarray(self.pipeline_.predict(feature_frame), dtype=float)
+        fitted = np.maximum(
+            np.asarray(self.pipeline_.predict(feature_frame), dtype=float), 0.0
+        )
         residual = target - fitted
         if fit_kwargs:
             self.residual_variance_ = float(
@@ -147,8 +150,11 @@ class BoundedQuadraticRegressionRegressor:
         missing = [column for column in features if column not in data]
         if missing:
             raise ValueError(f"missing required columns: {missing}")
-        mean = np.asarray(
-            self.pipeline_.predict(data.loc[:, list(features)]), dtype=float
+        mean = np.maximum(
+            np.asarray(
+                self.pipeline_.predict(data.loc[:, list(features)]), dtype=float
+            ),
+            0.0,
         )
         return PredictionResult(
             mean=mean,

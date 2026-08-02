@@ -12,6 +12,9 @@ from nrr_study.reviewer_revision import (
     vectorized_pair_universe_score_sensitivities,
 )
 from nrr_study.reviewer_round3 import (
+    PAIR_FRAGILITY_COUNTS,
+    PAIR_FRAGILITY_SEEDS,
+    pair_sampling_fragility_audit,
     public_geology_group_summary,
     residual_distribution_diagnostics,
     version_flag_exclusion_sensitivities,
@@ -85,6 +88,37 @@ def _flag_fixture() -> pd.DataFrame:
             )
     return pd.DataFrame(rows)
 
+
+def test_pair_sampling_fragility_is_non_decision_and_reproducible() -> None:
+    data = _flag_fixture()
+    kwargs = {
+        "seeds": (101, 202),
+        "pair_counts": (100, 200),
+        "short_lag_quantile": 0.20,
+    }
+    first_detail, first_summary, first_audit = (
+        pair_sampling_fragility_audit(data, **kwargs)
+    )
+    second_detail, second_summary, second_audit = (
+        pair_sampling_fragility_audit(data, **kwargs)
+    )
+    pd.testing.assert_frame_equal(first_detail, second_detail)
+    pd.testing.assert_frame_equal(first_summary, second_summary)
+    assert first_audit == second_audit
+    assert len(first_detail) == 2 * 2 * 3
+    assert first_detail["null_recalibrated"].eq(False).all()
+    assert first_detail["threshold_reported"].eq(False).all()
+    assert first_detail["pass_assessed"].eq(False).all()
+    assert first_detail["changes_frozen_gate"].eq(False).all()
+    assert first_audit["status"] == "complete_inconclusive"
+    assert first_audit["changes_frozen_covariance_gate"] is False
+
+
+def test_pair_sampling_fragility_defaults_are_fixed_and_include_frozen_design() -> None:
+    assert PAIR_FRAGILITY_SEEDS[-1] == 20260728
+    assert 20_000 in PAIR_FRAGILITY_COUNTS
+    assert len(PAIR_FRAGILITY_SEEDS) == len(set(PAIR_FRAGILITY_SEEDS))
+    assert len(PAIR_FRAGILITY_COUNTS) == len(set(PAIR_FRAGILITY_COUNTS))
 
 def test_pair_universe_variants_use_declared_denominators() -> None:
     design = PairScoreDesign(
@@ -166,3 +200,5 @@ def test_round3_config_does_not_replace_frozen_gate() -> None:
     assert round3["pair_universe_score"]["pair_count"] == 20_000
     assert round3["pair_universe_score"]["residual_standardization"] is False
     assert round3["source_version_flag_exclusions"]["inner_grouped_folds"] == 5
+
+

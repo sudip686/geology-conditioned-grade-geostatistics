@@ -65,6 +65,23 @@ FLAG_FIELDS = (
     "source_lithology_difference",
     "source_weathering_difference",
 )
+# Fixed post-review numerical-stability design. These values are declared in
+# source and are not selected from the resulting scores. The audit deliberately
+# performs no null recalibration and makes no pass/fail decision.
+PAIR_FRAGILITY_SEEDS = (
+    20260700,
+    20260701,
+    20260702,
+    20260703,
+    20260704,
+    20260705,
+    20260706,
+    20260707,
+    20260708,
+    20260709,
+    20260728,
+)
+PAIR_FRAGILITY_COUNTS = (5_000, 10_000, 20_000, 40_000, 80_000, 160_000)
 
 
 def public_geology_group_summary(
@@ -492,6 +509,142 @@ def pair_universe_score_sensitivity(
     return pd.DataFrame(rows), summary
 
 
+def pair_sampling_fragility_audit(
+    primary: pd.DataFrame,
+    *,
+    seeds: Sequence[int] = PAIR_FRAGILITY_SEEDS,
+    pair_counts: Sequence[int] = PAIR_FRAGILITY_COUNTS,
+    short_lag_quantile: float = 0.20,
+) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, object]]:
+    """Measure Monte Carlo fragility without recalibrating or declaring a pass.
+
+    The fixed seed-by-pair-count grid changes only the sampled pair design.
+    It is a reviewer-motivated numerical-stability audit, not an alternative
+    covariance gate. Null thresholds are intentionally absent because using a
+    threshold without recalibrating it for every design would be invalid.
+    """
+
+    declared_seeds = tuple(int(value) for value in seeds)
+    declared_counts = tuple(int(value) for value in pair_counts)
+    if not declared_seeds or len(set(declared_seeds)) != len(declared_seeds):
+        raise ValueError("seeds must be non-empty and unique")
+    if not declared_counts or len(set(declared_counts)) != len(declared_counts):
+        raise ValueError("pair_counts must be non-empty and unique")
+    if any(value < 10 for value in declared_counts):
+        raise ValueError("each pair count must be at least ten")
+    if not 0.0 < float(short_lag_quantile) < 1.0:
+        raise ValueError("short_lag_quantile must lie in (0, 1)")
+
+    coordinates = primary[
+        ["mid_easting", "mid_northing", "mid_rl"]
+    ].to_numpy(float)
+    holes = primary["BHID"].astype(str).to_numpy()
+    domains = primary["canonical_lithology"].astype(str).to_numpy()
+    trend = trend_residualizer().fit(primary, "tgc_pct")
+    residuals = (
+        primary["tgc_pct"].to_numpy(float) - trend.predict(primary).mean
+    )
+    methods = (
+        "legacy_all_pair_denominator",
+        "same_supported_hole_pairs",
+        "within_hole_pair_ratio",
+    )
+    rows: list[dict[str, object]] = []
+    for pair_count in declared_counts:
+        for seed in declared_seeds:
+            design = make_pair_score_design(
+                coordinates,
+                holes,
+                domains,
+                pair_count=pair_count,
+                short_lag_quantile=float(short_lag_quantile),
+                random_state=seed,
+            )
+            scores = vectorized_pair_universe_score_sensitivities(
+                residuals[:, None], design
+            )
+            for method in methods:
+                rows.append(
+                    {
+                        "method": method,
+                        "random_seed": seed,
+                        "pair_count_requested": pair_count,
+                        "pair_count_used": int(design.pair_count_used),
+                        "eligible_hole_pairs": int(
+                            design.eligible_hole_pairs
+                        ),
+                        "short_supported_hole_pairs": int(
+                            np.sum(design.short_counts > 0)
+                        ),
+                        "short_lag_quantile": float(short_lag_quantile),
+                        "empirical_score": float(scores[method][0]),
+                        "null_recalibrated": False,
+                        "threshold_reported": False,
+                        "pass_assessed": False,
+                        "analysis_role": (
+                            "reviewer_motivated_post_analysis_numerical_"
+                            "stability_audit"
+                        ),
+                        "changes_frozen_gate": False,
+                    }
+                )
+    detail = pd.DataFrame(rows)
+    summary = (
+        detail.groupby(["method", "pair_count_requested"], sort=False)
+        .agg(
+            seed_count=("random_seed", "nunique"),
+            score_minimum=("empirical_score", "min"),
+            score_median=("empirical_score", "median"),
+            score_maximum=("empirical_score", "max"),
+            score_standard_deviation=("empirical_score", "std"),
+            fraction_negative=(
+                "empirical_score",
+                lambda values: float(np.mean(values < 0.0)),
+            ),
+            fraction_positive=(
+                "empirical_score",
+                lambda values: float(np.mean(values > 0.0)),
+            ),
+        )
+        .reset_index()
+    )
+    overall_method = (
+        detail.groupby("method", sort=False)["empirical_score"]
+        .agg(["min", "median", "max", "std"])
+        .reset_index()
+    )
+    sign_changes = {
+        str(row.method): bool(row["min"] < 0.0 < row["max"])
+        for _, row in overall_method.iterrows()
+    }
+    audit_summary: dict[str, object] = {
+        "status": "complete_inconclusive",
+        "conclusion": (
+            "empirical short-lag scores are sensitive to the declared "
+            "sampling seed and pair count; no detection or pass is claimed"
+        ),
+        "declared_seeds": list(declared_seeds),
+        "declared_pair_counts": list(declared_counts),
+        "design_count": len(declared_seeds) * len(declared_counts),
+        "methods": list(methods),
+        "short_lag_quantile": float(short_lag_quantile),
+        "null_recalibrated": False,
+        "threshold_reported": False,
+        "pass_assessed": False,
+        "score_sign_changes": sign_changes,
+        "method_score_ranges": overall_method.to_dict("records"),
+        "analysis_role": (
+            "reviewer_motivated post-analysis numerical-stability audit"
+        ),
+        "changes_frozen_covariance_gate": False,
+        "what_would_support_a_component_claim": (
+            "a deterministic exhaustive design or a separately declared "
+            "sampling design with matched null calibration and numerical-"
+            "stability evidence"
+        ),
+    }
+    return detail, summary, audit_summary
+
 def residual_distribution_diagnostics(
     primary: pd.DataFrame,
 ) -> tuple[pd.DataFrame, dict[str, object]]:
@@ -588,3 +741,5 @@ def residual_distribution_diagnostics(
         "changes_frozen_gate": False,
     }
     return pd.DataFrame(rows), summary
+
+

@@ -5,10 +5,10 @@
   "manuscript_or_figure_generator_included": false,
   "persistent_identifier": null,
   "publication_status": "remote_tagged",
-  "release_tag": "v0.5.0",
+  "release_tag": "v0.6.0",
   "repository": "https://github.com/sudip686/geology-conditioned-grade-geostatistics",
   "schema_version": "1.0",
   "scope": "software_tests_configuration_synthetic_workflow_and_approved_aggregates",
-  "upstream_repository_commit_before_local_build": "544000be5613e48a9cd9ecfc5ff330327294ae57",
-  "version": "0.5.0"
+  "upstream_repository_commit_before_local_build": "1804bc50adba37486142c0f3f50774f98dc45c83",
+  "version": "0.6.0"
 }

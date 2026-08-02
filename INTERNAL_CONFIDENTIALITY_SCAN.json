@@ -1,5 +1,5 @@
 {
-  "files_scanned": 74,
+  "files_scanned": 76,
   "findings": [],
   "rules": [
     "no Git-history files or symlinks",

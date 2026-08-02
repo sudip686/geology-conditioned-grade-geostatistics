@@ -19,6 +19,8 @@ independent_synthetic_evaluation.csv,aggregate numerical evidence,"no rows, coor
 label_perturbation_summary.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
 leave_one_batch_out_summary.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
 mass_conservation.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+pair_sampling_fragility_summary.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
+pair_sampling_fragility_summary.json,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
 pair_universe_score_sensitivity.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
 paired_primary_scheme_evidence.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"
 positive_control_design.csv,aggregate numerical evidence,"no rows, coordinates, or direct identifiers"

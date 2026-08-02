@@ -1,0 +1,66 @@
+{
+  "status": "complete_inconclusive",
+  "conclusion": "empirical short-lag scores are sensitive to the declared sampling seed and pair count; no detection or pass is claimed",
+  "declared_seeds": [
+    20260700,
+    20260701,
+    20260702,
+    20260703,
+    20260704,
+    20260705,
+    20260706,
+    20260707,
+    20260708,
+    20260709,
+    20260728
+  ],
+  "declared_pair_counts": [
+    5000,
+    10000,
+    20000,
+    40000,
+    80000,
+    160000
+  ],
+  "design_count": 66,
+  "methods": [
+    "legacy_all_pair_denominator",
+    "same_supported_hole_pairs",
+    "within_hole_pair_ratio"
+  ],
+  "short_lag_quantile": 0.2,
+  "null_recalibrated": false,
+  "threshold_reported": false,
+  "pass_assessed": false,
+  "score_sign_changes": {
+    "legacy_all_pair_denominator": true,
+    "same_supported_hole_pairs": true,
+    "within_hole_pair_ratio": true
+  },
+  "method_score_ranges": [
+    {
+      "method": "legacy_all_pair_denominator",
+      "min": -0.04660915638243268,
+      "median": -0.008987596623070915,
+      "max": 0.05368559518835292,
+      "std": 0.01929970771068558
+    },
+    {
+      "method": "same_supported_hole_pairs",
+      "min": -0.009433656459858497,
+      "median": 0.0008069518692058186,
+      "max": 0.00883752816992267,
+      "std": 0.0033147006937855267
+    },
+    {
+      "method": "within_hole_pair_ratio",
+      "min": -0.014791638731309842,
+      "median": 0.00036425343881668626,
+      "max": 0.008545691503665798,
+      "std": 0.0032500817252740333
+    }
+  ],
+  "analysis_role": "reviewer_motivated post-analysis numerical-stability audit",
+  "changes_frozen_covariance_gate": false,
+  "what_would_support_a_component_claim": "a deterministic exhaustive design or a separately declared sampling design with matched null calibration and numerical-stability evidence"
+}
